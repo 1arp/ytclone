@@ -4,19 +4,23 @@ import { VideoModel } from "~/models/Video";
 const route = Router()
 
 route.post('/publish', (req, res) => {
-  const { title, description, url, userId } = req.body
+  const { title, description, url, userId, category} = req.body
   const newVideo = new VideoModel({
     title,
     description,
     url,
-    user: userId
+    user: userId,
+    category,
   })
   newVideo.save()
   res.json(newVideo)
 })
 
 route.get('/', async (req, res) => {
-  const videos = await VideoModel.find().populate('user')
+  const { category } = req.body
+  const videos = await VideoModel.find({
+    category,
+  }).populate('user')
   res.json({ data: videos })
 })
 

@@ -19,4 +19,11 @@ route.post("/unsubscribe", async (req, res) => {
   res.json({status:"ok"})
 });
 
+route.get('/mysubscribers', async(req,res) => {
+  const subscribers = await SubscriptionModel.find({
+    // @ts-ignore
+    subscriptionToId: req?.user?._id
+  })
+  return subscribers
+})
 export default route

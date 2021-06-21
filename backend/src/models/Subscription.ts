@@ -8,9 +8,7 @@ interface Subscription {
 
 const subscriptionSchema = new Schema<Subscription>({
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  contentId: { type: Schema.Types.ObjectId },
-  comment: { type: String, required: true }
-
+  contentSubscriptionToId: { type: Schema.Types.ObjectId, ref: "User", required: true },
 })
 
 
